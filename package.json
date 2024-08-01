@@ -1,0 +1,21 @@
+{
+  "name": "nimbusbook-server",
+  "version": "1.0.0",
+  "description": "Your seamless, cloud-based notebook for capturing and organizing ideas anytime, anywhere.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [
+    "Cloud"
+  ],
+  "author": "Kartik Mishra",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.2",
+    "nodemon": "^3.1.4"
+  }
+}
