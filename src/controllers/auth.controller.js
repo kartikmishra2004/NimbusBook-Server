@@ -3,8 +3,21 @@ import User from '../models/user.model.js';
 // Register logic
 export const register = async (req, res) => {
     try {
-        
+        const { fullName, email, password } = req.body;
+        const userExist = await User.findOne({ email });
+        if (userExist) {
+            res.status(400).json({ message: "Email already exist!!" });
+        }
+        const userCreated = await User.create({ fullName, email, password });
+
+        res.status(200).json({
+            message: "registration successful!!",
+            token: await userCreated.generateToken(),
+            userId: userCreated._id.toString(),
+        });
     } catch (error) {
+        // next(error);
+        console.log("Registration failed!!");
         
     }
 }
@@ -12,8 +25,8 @@ export const register = async (req, res) => {
 // Login logic
 export const login = async (req, res) => {
     try {
-        
+
     } catch (error) {
-        
+
     }
 }

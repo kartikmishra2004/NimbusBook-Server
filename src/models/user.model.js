@@ -1,29 +1,56 @@
 import mongoose from "mongoose";
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const userSchama = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     fullName: {
         type: String,
-        required: [true, "Name is required!!"],
-        minlength: [3, "Name must be atleast 3 characters long!!"],
-        maxlength: [30, "Name must be less than 30 characters!!"],
     },
     email: {
         type: String,
-        required: [true, "Email is required!!"],
         lowercase: true,
-        minlength: [4, "Please enter a valid email address!!"],
-        maxlength: [30, "Please enter a valid email address!!"],
-        match: [/\S+@\S+\.\S+/, "Please enter a valid email address!!"],
     },
     password: {
         type: String,
-        required: [true, "Password is required!!"],
-        minlength: [6, "Password must be atleast 3 characters long!!"],
-        maxlength: [50, "Password must be less than 50 characters!!"],
-        match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character!!'],
     }
 }, { timestamps: true });
 
-const User = mongoose.model("User", userSchama);
+// Securing password using bcrypt
+userSchema.pre('save', async function (next) {
+    const user = this;
+
+    if (!user.isModified("password")) {
+        next();
+    }
+
+    try {
+        const saltRound = await bcrypt.genSalt(10);
+        const hash_password = await bcrypt.hash(user.password, saltRound);
+        user.password = hash_password;
+    } catch (error) {
+        // next(error);
+        console.log("Error hashing password!!");
+
+    }
+});
+
+// Generating JSON web token
+userSchema.methods.generateToken = async function () {
+    try {
+        return jwt.sign({
+            userId: this._id.toString(),
+            email: this.email,
+        },
+            process.env.JWT_SECRET_KEY,
+            {
+                expiresIn: "30d"
+            }
+        );
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const User = mongoose.model("User", userSchema);
 
 export default User;
