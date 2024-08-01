@@ -1,10 +1,6 @@
 import express from 'express';
-import dotenv from 'dotenv';
-import connectDB from './db/db.connection.js'
-
-dotenv.config({
-    path: './.env',
-})
+import 'dotenv/config';
+import connectDB from './db/db.connection.js';
 
 const app = express();
 
