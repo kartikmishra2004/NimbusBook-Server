@@ -18,15 +18,39 @@ export const register = async (req, res) => {
     } catch (error) {
         // next(error);
         console.log("Registration failed!!");
-        
+
     }
 }
 
 // Login logic
 export const login = async (req, res) => {
     try {
+        const { email, password } = req.body;
+
+        const userExist = await User.findOne({ email });
+
+        if (!userExist) {
+            res.status(400).json({ message: "Invalid username or password!!" });
+        }
+
+        const user = await userExist.comparePassword(password);
+
+        if (user) {
+            res.status(201).json({
+                message: "Login successful!!",
+                token: await userExist.generateToken(),
+                userId: userExist._id.toString()
+
+            });
+        }
+        else {
+            res.status(400).json({ message: "Invalid usernamne or password!!" })
+        }
+
 
     } catch (error) {
+        // next(error);
+        console.log("Failed to login!!");
 
     }
 }
