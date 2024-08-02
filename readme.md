@@ -22,7 +22,7 @@ NimbusBook is a cloud-based notes application designed to help you capture, orga
 1. Clone the repository:
 
 ```bash
-    git clone https://github.com/yourusername/NimbusBook.git
+    git clone https://github.com/kartikmishra2004/NimbusBook-Server
 ```
 
 2. Navigate to the project server directory:
