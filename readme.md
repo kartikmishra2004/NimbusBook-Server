@@ -25,10 +25,10 @@ NimbusBook is a cloud-based notes application designed to help you capture, orga
     git clone https://github.com/yourusername/NimbusBook.git
 ```
 
-2. Navigate to the project directory:
+2. Navigate to the project server directory:
 
 ```bash
-    cd NimbusBook
+    cd Server
 ```
 
 3. Install dependencies:
