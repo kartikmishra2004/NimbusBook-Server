@@ -16,9 +16,7 @@ export const register = async (req, res) => {
             userId: userCreated._id.toString(),
         });
     } catch (error) {
-        // next(error);
-        console.log("Registration failed!!");
-
+        next(error);
     }
 }
 
@@ -46,11 +44,7 @@ export const login = async (req, res) => {
         else {
             res.status(400).json({ message: "Invalid usernamne or password!!" })
         }
-
-
     } catch (error) {
-        // next(error);
-        console.log("Failed to login!!");
-
+        next(error);
     }
 }
