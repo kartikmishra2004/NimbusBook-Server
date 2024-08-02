@@ -1,10 +1,19 @@
 import express from 'express';
+import cors from 'cors';
 import 'dotenv/config';
 import connectDB from './db/db.connection.js';
 import authRoute from './routes/auth.route.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 
 const app = express();
+
+const corsOptions = {
+    origin: "http://localhost:5173",
+    methods: "GET, POST, PUT, DELETE",
+    credentials: true,
+}
+
+app.use(cors(corsOptions));
 
 // Middlewares
 app.use(express.json());
