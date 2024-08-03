@@ -3,6 +3,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import connectDB from './db/db.connection.js';
 import authRoute from './routes/auth.route.js';
+import notesRout from './routes/notes.route.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 
 const app = express();
@@ -20,6 +21,9 @@ app.use(express.json());
 
 // API for Authentication
 app.use("/api/v1/auth", authRoute);
+
+// API for Notes
+app.use("/api/v1/notes", notesRout);
 
 app.use(errorMiddleware)
 
