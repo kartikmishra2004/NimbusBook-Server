@@ -7,7 +7,6 @@ const noteSchema = new mongoose.Schema({
     },
     content: {
         type: String,
-        default: "Write your notes here!!",
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
