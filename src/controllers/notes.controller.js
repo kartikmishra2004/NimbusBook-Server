@@ -41,7 +41,7 @@ export const updatenotes = async (req, res) => {
             res.status(401).json({ message: "Unauthorized!!" });
         }
         note = await Note.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true });
-        res.status(200).json({ note });
+        res.status(200).json({ note, message: "Notes updated successfully!!" });
     } catch (error) {
         res.status(400).json({ message: "Failed to update notes!!" });
     }
@@ -59,7 +59,7 @@ export const deletenotes = async (req, res) => {
             res.status(401).json({ message: "Unauthorized!!" });
         }
         note = await Note.findByIdAndDelete(req.params.id);
-        res.status(200).json({ message: "Success", note });
+        res.status(200).json({ message: "Notes deleted successfully!!"});
     } catch (error) {
         res.status(400).json({ message: "Failed to delete notes!!" });
     }
