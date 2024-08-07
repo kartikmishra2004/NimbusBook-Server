@@ -4,6 +4,7 @@ import 'dotenv/config';
 import connectDB from './db/db.connection.js';
 import authRoute from './routes/auth.route.js';
 import notesRout from './routes/notes.route.js';
+import contactRout from './routes/contact.route.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 
 const app = express();
@@ -24,6 +25,9 @@ app.use("/api/v1/auth", authRoute);
 
 // API for Notes
 app.use("/api/v1/notes", notesRout);
+
+// API for contact details
+app.use("/api/v1/contact", contactRout);
 
 app.use(errorMiddleware)
 
