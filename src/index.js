@@ -10,7 +10,7 @@ import errorMiddleware from './middlewares/error.middleware.js';
 const app = express();
 
 const corsOptions = {
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://nimbusbook.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }
